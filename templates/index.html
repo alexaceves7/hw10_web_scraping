@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+        <h1>Mission to Mars</h1>
+        <p>Latest News, Featured Image, Weather, Facts, and Images</p>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get The Most Current Data!</a></p>
+        </div>
+        <div class="col-md-1"></div>    
+        <div class="col-md-10">
+            <h2>Latest Mars News</h2>
+            <h3>{{mars.latest_news['News Title']}}</h3>
+            <p>{{mars.latest_news['News Content']}}</p>
+        </div>
+        <div class="col-md-1"></div> 
+        <div class="col-md-12"></div>
+        <div class="col-md-1"></div>
+        <div class="col-md-11">
+            <h2>Featured Image</h2>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <img src="{{mars.featured_img['url']}}" class="img-responsive">
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h4>Current Weather on Mars</h4>
+                    <p>{{mars.weather['weather']}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div>
+                <h4>Mars Facts</h4>
+            </div>
+            <div class="table-responsive">
+                <table border="1" class="dataframe">
+                    <tbody>
+                            {% for info in mars.facts %}
+                            <tr>
+                            <td>{{ info.key }}</td>
+                            <td>{{ info.value }}</td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12"></div>
+        <div class="col-md-12" style="text-align: center">
+            <h2>Mars Hemispheres</h2>
+        </div>
+        <div class="col-md-12"></div>
+        {% for img in mars.img_urls %}
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{{img.img_url}}" alt="{{img.title}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{img.title}}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+
+</html>
